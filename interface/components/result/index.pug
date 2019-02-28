@@ -1,0 +1,133 @@
+// ko if:(result_fit && result_fit())
+.table-wrapper
+  table.terms
+    thead
+      tr
+        th(colspan="3") Current Model
+      tr
+        th Term
+        // ko foreach: allstats().filter((x) => x.candidate)
+        th(data-bind="text: name")
+        // /ko
+    tbody
+      // ko foreach: result_fit().terms
+      tr
+        td.term
+          span.remove.fa.fa-close(data-bind="click:function(){selected(true)}")
+          span.operator(data-bind="text:coeff<0?'-':'+'")
+          span.coeff(data-bind="num:Math.abs(coeff)")
+          // ko foreach:term
+          // ko if:exp
+          span.name
+            span.lparen (
+            span(data-bind="text:name||'x'")
+            // ko ifnot:name
+            sub(data-bind="text:index")
+            // /ko
+            // ko if:lag
+            sub
+              span lag
+              span(data-bind="text:lag || 0")
+            // /ko
+            span.rparen )
+            // ko if:exp !== 1
+            sup(data-bind="text:exp")
+            // /ko
+          // /ko
+          // /ko
+        // ko each: stats
+        td.stat(data-bind="css: { \
+          red: allstats().filter((x) => x.candidate).length > $index() \
+                  && allstats().filter((x) => x.candidate)[$index()].id == 'pt' \
+                  && $value > $parents[1].psig() \
+        }")
+          span.value(data-bind="num:$value")
+        // /ko
+      // /ko
+  a.button(data-bind="click:function(){model().show_export_code(true)}") Export to Code
+
+.table-wrapper
+  table.stats
+    thead
+      tr
+        th(colspan="4") Goodness of Fit Statistics
+      tr
+        th Stat
+        th Fit
+        // ko if: result_cross() && data_cross()
+        th Cross
+        // /ko
+        // ko if: result_validation() && data_validation()
+        th Validation
+        // /ko
+    tbody
+      // ko with:{fit:result_fit, cross:result_cross, data_cross:data_cross, validation:result_validation, data_validation:data_validation}
+      // ko foreach:allstats
+      // ko ifnot:candidate
+
+      // ko ifnot:((name=='PLACEHOLDER') || (name=='s.e. SKEW') || (name=='s.e. KURT'))
+      tr.stat
+        td.name(data-bind="text:name")
+        td.value(data-bind="num:$parent.fit().stats[id], fmt: format")
+        // ko if: ($parent.cross() && $parent.data_cross())
+        td.value(data-bind="num:$parent.cross().stats[id], fmt: format")
+        // /ko
+        // ko if: ($parent.validation() && $parent.data_validation())
+        td.value(data-bind="num:$parent.validation().stats[id], fmt: format")
+        // /ko
+      // /ko
+      // ko if:name=='PLACEHOLDER'
+      tr.placeholder
+        td.name
+        td.value
+        // ko if: ($parent.cross() && $parent.data_cross())
+        td.value
+        // /ko
+        // ko if: ($parent.validation() && $parent.data_validation())
+        td.value
+        // /ko
+      // /ko
+      // ko if: name=='s.e. SKEW'
+      tr.sestat
+        td.name(data-bind="text:name")
+        td.value(data-bind="num:$parent.fit().stats[id], fmt: format")
+        // ko if: ($parent.cross() && $parent.data_cross())
+        td.value(data-bind="num:$parent.cross().stats[id], fmt: format")
+        // /ko
+        // ko if: ($parent.validation() && $parent.data_validation())
+        td.value(data-bind="num:$parent.validation().stats[id], fmt: format")
+        // /ko
+      // /ko
+      // ko if: name=='s.e. KURT'
+      tr.sestat
+        td.name(data-bind="text:name")
+        td.value(data-bind="num:$parent.fit().stats[id], fmt: format")
+        // ko if: ($parent.cross() && $parent.data_cross())
+        td.value(data-bind="num:$parent.cross().stats[id], fmt: format")
+        // /ko
+        // ko if: ($parent.validation() && $parent.data_validation())
+        td.value(data-bind="num:$parent.validation().stats[id], fmt: format")
+        // /ko
+      // /ko
+      // /ko
+      // /ko
+      // /ko
+      
+.table-wrapper
+  // /ko
+  tf-graph(params="data:graph_data,row_labels:graph_row_labels,ylabel:'Residuals',xlabel:'Predicted Values', graph_type:selectedvalue")
+  div.dropdown
+    span Graph Types: 
+    <select id="graphs" onchange="changeGraph();">
+      <option value="scatter" selected>Scatter</option>
+      <option value="histogram">Histogram</option>
+      <option value="normal">Normal</option>
+      <option value="autocorrelation">Autocorrelation</option>
+    </select>
+
+// /ko
+// ko ifnot:(result_fit && result_fit())
+span.nomodel Select candidate terms to create a model.
+// /ko
+
+

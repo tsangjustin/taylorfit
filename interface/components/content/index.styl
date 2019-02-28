@@ -1,0 +1,73 @@
+
+tf-content
+  position relative
+  display block
+  color black
+  size 100%
+  padding-top header-height
+  box-sizing border-box
+  background white
+  overflow hidden
+
+  tf-loader
+    margin 0
+    padding 0
+    size initial
+    .button
+      padding 6px 10px
+      min-width initial
+      font-size 14pt
+
+
+  img.loader
+    absolute top 0 left 0
+    z-index 10000
+    size 100%
+    opacity 0.05
+
+  & > span.wrapper
+    size 100%
+    display block
+    overflow hidden
+    position relative
+
+    .candidates-pane
+    .data-pane
+    .model-pane
+      padding 20px
+      box-sizing border-box
+      display block
+      background #fff
+
+    .candidates-pane
+      float right
+      text-align right
+      overflow hidden
+
+    .data-pane
+      float left
+      white-space normal
+      & > .buffer
+        display block
+        height 20px
+      & > tf-grid
+        display inline-block
+        margin-right 20px
+        margin-bottom 20px
+      & > tf-loader
+        margin-bottom 10px
+        .small, hr
+          display none
+
+    // control min sizes
+    .model-pane
+    .candidates-pane
+      min-height 130px
+      min-width 220px
+      max-width calc(100% - 220px)
+    .split-data[hover="false"]
+      // max-height calc(100% - 130px)
+      height 100% !important
+      max-height 100% !important
+
+

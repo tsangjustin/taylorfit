@@ -1,0 +1,48 @@
+
+input(type="file" accept=".csv" hidden
+  data-bind="attr:{id:id},value:dataset")
+label.button.input-dataset(data-bind="attr:{for:id}")
+  span
+    | Import&nbsp;
+    span(data-bind="text:table")
+    | &nbsp;Data
+  hr
+  span.small Upload CSV data to begin!
+// ko if: init
+input#input-model(type="file" accept=".json,.tf" data-bind="value:model" hidden)
+label.button.input-model(for="input-model")
+  span Import Project
+  hr
+  span.small Already have a project?
+a.button.output-manual(href="resources/TaylorFit Manual 2017.pdf" target="window")
+  span Open Users' Manual
+  hr
+  span.small Click to Download
+a.button.info(href="http://www.simetrica-llc.com" target="window")
+  span Simetrica LLC.
+  hr
+  span.small For More Information
+// a.button.example-1(href="resources/auto-mpg.csv" target="window")
+a.button.example-1(data-bind="click:() => load_dataset('auto-mpg')")
+  span Auto MPG
+  hr
+  span.small Load Example Data
+// a.button.example-2(href="resources/lydpink-time-series.csv" target="window")
+a.button.example-2(data-bind="click:() => load_dataset('lydpink')")
+  span Lydia Pinkham
+  hr
+  span.small Load Example Data
+a.button.info(href="https://goo.gl/forms/sVJCq2efUgKYVM752" target="window")
+  span Give Us Feedback
+  hr
+  span.small Go To Survey
+.blurb
+    p
+      | TAYLORFIT implements an innovative method for data mining, forecasting, and correlation analysis called Multivariate Polynomial Regression (MPR) modeling. MPR is class of models of a type known as response surface analysis (RSA). It has applications in business and finance, health sciences, and almost any area where numerical data are collected with cause-and-effect relationships expected.
+    p
+      | An MPR model is essentially a multiple regression model with polynomial and cross-product (interaction) terms. MPR models can replace linear modeling techniques such as multilinear regression and ARMA (Box-Jenkins) models, and can produce far superior results because they incorporate nonlinear effects. MPR models compare favorably to artificial neural network (ANN) models, producing similar accuracy with greater transparency and resistance to overfitting.
+    p
+      | Overall, TaylorFit RSA with MPR produces models that are relatively transparent, transportable, tractable, accurate, unbiased, compact and resistant to overfitting. In a word: Better!
+
+// /ko
+

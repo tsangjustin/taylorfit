@@ -1,0 +1,98 @@
+
+@import url('https://fonts.googleapis.com/css?family=Muli');
+@import url("https://fonts.googleapis.com/css?family=Cookie")
+@import url('https://fonts.googleapis.com/css?family=Anonymous+Pro');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+html, body
+  margin 0
+  size 100%
+  font-size 16pt
+  user-select none
+  cursor default
+  min-width 600px
+
+tf-app
+  size 100%
+  & > *
+    display inline-block
+
+body, input
+  font-family "Anonymous Pro", sans-serif
+
+[hidden]
+  display none
+
+.button
+  background green
+  color white
+  padding 6px 12px 5px
+  font-size 12pt
+  display inline-block
+  cursor pointer
+  border-radius 4px
+
+a
+  cursor pointer
+
+table
+  border-collapse collapse
+  border-radius 3px
+  overflow visible
+  & > thead > tr > th
+  & > tbody > tr > td
+    box-shadow inset -1px -1px 0 0 #EEE
+
+    &.static
+      color #CCC
+      padding 4px 12px 4px 10px
+      text-align right
+      font-size 12pt
+  & > thead
+    font-weight bold
+
+input
+  box-sizing border-box
+  border-radius 0
+  appearance none
+  background transparent
+  color black
+  outline 0
+  border 0
+  margin 0
+  padding 0
+  text-align left
+  font-size 1em
+  line-height 1
+  vertical-align middle
+  display inline-block
+  font-size 12pt
+.placeholder
+  color #999
+  pointer-events none
+
+tf-loader
+  size 100%
+  display block
+  padding 30px
+  box-sizing border-box
+  text-align center
+  padding-top 30px + header-height
+
+  .button
+    font-size 18pt
+    padding 40px
+    min-width 240px
+    text-align center
+    background green
+    margin 15px
+    &.output-manual
+      background purple
+    &.info
+      background blue
+    &.example-1, &.example-2
+      background orange
+    & > hr
+      border 1px solid white
+    & > .small
+      font-size 12pt

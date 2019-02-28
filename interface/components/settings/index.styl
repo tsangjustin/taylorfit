@@ -1,0 +1,81 @@
+
+tf-settings
+  z-index 1000
+
+  & > .questions
+    absolute right 0
+    display block
+    transition transform 300ms
+    background #EEE
+    color black
+    width 300px
+    height "calc(100% - %s)" % header-height
+    box-shadow 0 0 0 2px #DDD
+    padding 10px
+    transform translateX(100%)
+    z-index 1000
+    text-align right
+    overflow-y auto
+    box-sizing border-box
+
+    .button
+      text-align center
+      display block
+      width 100%
+      box-sizing border-box
+      float right
+      padding 10px
+      margin-bottom 10px
+      text-decoration none
+    .warning
+      background red
+    .info
+      background blue
+    .manual
+      background purple
+
+    &.active
+      transform translateX(0)
+
+    & > .title
+      font-size 18pt
+
+    & > *
+      padding 10px
+      display block
+      text-align right
+      &:not(:last-child)
+        box-shadow 0 1px 0 rgba(black, 0.2)
+
+      header
+        display inline-block
+        margin-bottom 8px
+        float left
+
+        .title
+          font-size 12pt
+        .subtitle
+          font-size 8pt
+          margin-left 10px
+
+    & > .statlist
+      & > .stat
+        background rgba(black, 0.1)
+        box-shadow 0 0 0 2px rgba(black, 0.3)
+        border-radius 100px
+        font-size 10pt
+        margin 4px
+        padding 4px 12px
+        display inline-block
+        transition 300ms
+        &:hover
+          box-shadow 0 0 0 2px green
+        &.selected
+          background green
+          box-shadow 0 0 0 2px green
+          color white
+          &:hover
+            box-shadow 0 0 0 2px rgba(black, 0.3)
+
+
+

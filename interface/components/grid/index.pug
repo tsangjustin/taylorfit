@@ -1,0 +1,105 @@
+
+span.title(data-bind="text:name")
+tf-pager(params="source:rows,start:start,end:end")
+a.save(data-bind="click:save") Export Data
+// ko if:table == "fit"
+span.name(data-bind="text:model().name")
+// /ko
+// ko if:table == "cross"
+span.name(data-bind="text:model().name_cross")
+a.clear(data-bind="click:clear") Clear Data
+// /ko
+// ko if:table == "validation"
+span.name(data-bind="text:model().name_validation")
+a.clear(data-bind="click:clear") Clear Data
+// /ko
+table.grid
+  thead
+    tr
+      th
+        //- empty for row numbers
+      // ko foreach: cols
+      th(data-bind="css:{dependent:$index() === $parent.dependent()}")
+        // ko if:name
+        span(data-bind="text:name")
+        // /ko
+        // ko ifnot:name
+        span.placeholder
+          span X
+          sub(data-bind="text:$index")
+        // /ko
+        tf-dropdown(params="shallow:1,align:'right'")
+          span.mark(data-bind="click:function(){dependent($index())}")
+            | Mark as Dependant
+          span.mark(data-bind="click:function(){histogram($index())}")
+            | Histogram
+          span.mark(data-bind="click:function(){autocorrelation($index())}")
+            | Autocorrelation
+          span.mark(data-bind="click:function(){xyplot($index() + 1)}")
+            | XY Plot
+          //- span.mark(data-bind="click:function(){logarithm_col($index())}")
+          //-   | Logarithm
+      // /ko
+    
+      // ko if: extra
+      th.dep
+        span Dependent
+        tf-dropdown(params="align:'right'")
+          span.mark(data-bind="click:function(){histogram('Dependent')}")
+            | Histogram
+          span.mark(data-bind="click:function(){autocorrelation('Dependent')}")
+            | Autocorrelation
+          span.mark(data-bind="click:function(){xyplot('Dependent')}")
+            | XY Plot
+      th.prd
+        span Predicted
+        tf-dropdown(params="align:'right'")
+          span.mark(data-bind="click:function(){histogram('Predicted')}")
+            | Histogram
+          span.mark(data-bind="click:function(){autocorrelation('Predicted')}")
+            | Autocorrelation
+          span.mark(data-bind="click:function(){xyplot('Predicted')}")
+            | XY Plot
+      th.err
+        span Residual
+        tf-dropdown(params="align:'right'")
+          span.mark(data-bind="click:function(){histogram('Residual')}")
+            | Histogram
+          span.mark(data-bind="click:function(){autocorrelation('Residual')}")
+            | Autocorrelation
+          span.mark(data-bind="click:function(){xyplot('Residual')}")
+            | XY Plot
+          span.mark(data-bind="click:function(){normal('Residual')}")
+            | Normal
+      // /ko
+  tbody
+    // ko iter:{from:start,to:end}
+    tr
+      td.static
+        span(data-bind="text:1+index")
+      
+      // ko foreach: $parent.rows()[index]
+      td
+        // ko if: $data !== null && $data !== ""
+        span(data-bind="text:$data")
+        // /ko
+        // ko if: $data === null || $data === ""
+        span.placeholder No Data
+        // /ko
+      // /ko
+      // ko if:$parent.extra
+      // ko foreach: $parent.extra()[index]
+      td
+        span(data-bind="float:$data")
+      // /ko
+      // /ko
+      
+    //-
+      // ko if:$parent.results
+      // ko with:{dep:$data[$parent.dependent()], pred:(r = $parent.results()) ? r.predicted[$index()] : null}
+      td.dep(data-bind="float:dep")
+      td.prd(data-bind="float:pred")
+      td.ere(data-bind="float:dep-pred")
+      // /ko
+      // /ko
+    // /ko

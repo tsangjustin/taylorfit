@@ -1,0 +1,34 @@
+tf-histogram(params="model:model")
+tf-export-code(params="model:model")
+tf-autocorrelation(params="model:model")
+tf-xyplot(params="model:model")
+tf-normal(params="model:model")
+tf-settings(params="model:model")
+// ko if:model().progress()
+include loader.pug
+// /ko
+span.wrapper
+  .split-model(data-bind="split:{direction:'vertical'}")
+    .split-data(data-bind="split:{direction:'horizontal'}")
+      .model-pane
+        tf-result(params="model:model")
+      .candidates-pane
+        tf-candidates(params="model:model")
+    .data-pane
+      tf-grid(params="model:model,table:'fit',name:'Fit Data'")
+
+      // ko ifnot:model().data_cross
+      tf-loader(params="model:model,table:'cross'")
+      // /ko
+      // ko if:model().data_cross
+      tf-grid(params="model:model,table:'cross',name:'Cross Data',result_table:'result_cross'")
+      // /ko
+
+      // ko ifnot:model().data_validation
+      tf-loader(params="model:model,table:'validation'")
+      // /ko
+      // ko if:model().data_validation
+      tf-grid(params="model:model,table:'validation',name:'Validation Data',result_table:'result_valid'")
+      // /ko
+
+      span.buffer
