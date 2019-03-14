@@ -1,0 +1,13 @@
+
+
+header
+  span.title(data-bind="text:name")
+//- TODO: enforce min and max through keypress
+a.fa.fa-plus(data-bind="click:showinput,css:{hide:hide}")
+input.custom(data-bind="textInput:input,event:{change:add,blur:hideinput},css:{invalid:invalid,hide:!hide()},hasFocus:focus")
+
+//- TODO: replace with each binding
+// ko foreach: Object.keys(values()).sort(function(a,b){return Number(b)<Number(a)})
+a.pill(data-bind="text:$data,css:{active:$parent.values()[$data]},event:{click:$parent.toggle,dblclick:$parent.delete}")
+// /ko
+

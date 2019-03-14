@@ -1,0 +1,126 @@
+
+darken-amount = 6%
+
+tf-result
+  text-align center
+  *
+    user-select text
+
+  & > .nomodel
+    font-size 3vw
+    color #CCC
+    display block
+    user-select none
+
+  & > .table-wrapper
+    display inline-block
+    vertical-align top
+    margin-right 10px
+
+  .stat
+    &.red
+      background #ffccc6
+
+  .button
+    margin-top 20px
+    background #eee
+    color #314252
+
+  .placeholder
+    background-color grey
+    height 24px
+
+  .sestat
+    color #B0B0B0
+
+  .graph
+    background-color white
+    overflow visible
+    margin 10px
+
+    .axis-label
+      font-size 10pt
+      font-weight 700
+
+    // XXX: temporary
+    width 400px
+    height 267px
+
+    .truth
+      fill blue
+    .predicted
+      fill red
+    .error
+      stroke #DDD
+
+
+  span.graphs
+    padding 30px
+    box-sizing border-box
+    width 400px
+    display block
+    border 3px dashed rgba(black, 0.2)
+    border-radius 20px
+
+    & > *
+      display block
+      color #BBB
+    & > hr
+      border 1px solid #DDD
+    & > .title
+      font-size 28pt
+    & > .subtitle
+      font-size 16pt
+
+  div.dropdown
+    padding 10px
+    font-size 100%
+    position relative
+    width 10px
+    height 10px
+    left 10%
+    top 175%
+
+  table
+    font-size 12pt
+
+    & > thead > tr > th
+    & > tbody > tr > td
+      padding 3px 6px
+      box-shadow inset -1px -1px 0 0 #EEE, inset 1px 1px 0 0 #EEE
+
+  table.stats
+    & > tbody > tr
+      & > td.name
+        text-align left
+        font-weight bold
+      & > td.value
+        text-align right
+
+
+  table.terms
+    & > tbody > tr
+      & > td
+        text-align right
+      & > td.term
+        text-align left
+        & > span.remove
+          margin-right 4px
+          cursor pointer
+          color #CCC
+          transition color 300ms
+          &:hover
+            color red
+
+      &:nth-child(7n+1) > td.term
+        color darken(red,darken-amount)
+      &:nth-child(7n+2) > td.term
+        color darken(blue,darken-amount)
+      &:nth-child(7n+3) > td.term
+        color darken(green,darken-amount)
+      &:nth-child(7n+4) > td.term
+        color darken(orange,darken-amount)
+      &:nth-child(7n+5) > td.term
+        color darken(purple,darken-amount)
+      &:nth-child(7n+6) > td.term
+        color darken(cyan,darken-amount)
