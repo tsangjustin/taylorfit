@@ -73,8 +73,12 @@ table.grid
         tf-dropdown(params="align:'right'")
           span.mark(data-bind="click:function(){histogram('Dependent')}")
             | Histogram
+          span.mark(data-bind="click:function(){cumulative_distribution('Dependent')}")
+            | Cumulative Distribution
           span.mark(data-bind="click:function(){autocorrelation('Dependent')}")
             | Autocorrelation
+          span.mark(data-bind="click:function(){qqplot('Dependent')}")
+            | QQ Plot
           span.mark(data-bind="click:function(){xyplot('Dependent')}")
             | XY Plot
       th.prd
@@ -82,8 +86,12 @@ table.grid
         tf-dropdown(params="align:'right'")
           span.mark(data-bind="click:function(){histogram('Predicted')}")
             | Histogram
+          span.mark(data-bind="click:function(){cumulative_distribution('Predicted')}")
+            | Cumulative Distribution
           span.mark(data-bind="click:function(){autocorrelation('Predicted')}")
             | Autocorrelation
+          span.mark(data-bind="click:function(){qqplot('Predicted')}")
+            | QQ Plot
           span.mark(data-bind="click:function(){xyplot('Predicted')}")
             | XY Plot
       th.err
@@ -91,8 +99,12 @@ table.grid
         tf-dropdown(params="align:'right'")
           span.mark(data-bind="click:function(){histogram('Residual')}")
             | Histogram
+          span.mark(data-bind="click:function(){cumulative_distribution('Residual')}")
+            | Cumulative Distribution
           span.mark(data-bind="click:function(){autocorrelation('Residual')}")
             | Autocorrelation
+          span.mark(data-bind="click:function(){qqplot('Residual')}")
+            | QQ Plot
           span.mark(data-bind="click:function(){xyplot('Residual')}")
             | XY Plot
       // /ko
@@ -112,6 +124,12 @@ table.grid
         tf-dropdown(params="shallow:1,align:'right'")
           span.mark(data-bind="click:function(){histogram_sensitivity($index())}")
             | Histogram
+          span.mark(data-bind="click:function(){cumulative_distribution_sensitivity($index())}")
+            | Cumulative Distribution
+          span.mark(data-bind="click:function(){autocorrelation_sensitivity($index())}")
+            | Autocorrelation
+          span.mark(data-bind="click:function(){qqplot_sensitivity($index())}")
+            | QQ Plot
           span.mark(data-bind="click:function(){xyplot_sensitivity($index())}")
             | XY Plot
           span.mark(data-bind="click:function(){deleteSensitivity($index(),'sensitivity')}")

@@ -42,6 +42,9 @@ ko.components.register "tf-qqplot",
         return undefined
       index = @column_index()
       if typeof index == "string"
+        if index.indexOf("Sensitivity") != -1
+          index = index.split("_")[1]
+          return "Sensitivity " + model.sensitivityColumns()[index].name
         return index
       return model.columns()[index].name
     
@@ -56,12 +59,15 @@ ko.components.register "tf-qqplot",
           index = 1
         if index == "Residual"
           index = 2
+        if typeof index == "string" && index.indexOf("Sensitivity") != -1
+          # format is: Sensitivity_index
+          index = index.split("_")[1]
+          return Object.values(model.sensitivityData()[index])
+        return model["extra_#{model.data_plotted()}"]().map((row) => row[index])
       return model["data_#{model.data_plotted()}"]().map((row) => row[index])
 
     @close = ( ) ->
       model.show_qqplot undefined
-
-    @bucket_size = ko.observable(10);
 
     @charthtml = ko.computed () =>
       if !@active() || @values().length == 0
@@ -233,6 +239,9 @@ ko.components.register "tf-qqplot",
 
       svg_element.style.backgroundColor = "white"
       tick = svg_element.querySelectorAll ".tick"
+
+      console.log("hello")
+      console.log(@values())
 
       for i in [0..tick.length-1]
         # use transform property to check if the SVG element is on the top position of y axis

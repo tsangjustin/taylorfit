@@ -66,8 +66,12 @@ ko.components.register "tf-autocorrelation",
     @column_name = ko.computed ( ) => 
       if !@active()
         return undefined
-      if typeof @column_index() == "string"
-        return @column_index()
+      index = @column_index()
+      if typeof index == "string"
+        if index.indexOf("Sensitivity") != -1
+          index = index.split("_")[1]
+          return "Sensitivity " + model.sensitivityColumns()[index].name
+        return index
       return model.columns()[@column_index()].name
     
     @values = ko.computed ( ) => 
@@ -81,6 +85,10 @@ ko.components.register "tf-autocorrelation",
           index = 1
         if index == "Residual"
           index = 2
+        if typeof index == "string" && index.indexOf("Sensitivity") != -1
+          # format is: Sensitivity_index
+          index = index.split("_")[1]
+          return Object.values(model.sensitivityData()[index])
         return model["extra_#{model.data_plotted()}"]().map((row) => row[index])
       return model["data_#{model.data_plotted()}"]().map((row) => row[index])
 
@@ -93,7 +101,6 @@ ko.components.register "tf-autocorrelation",
       unless @active()
         return ""
 
-      # TODO : FINISH THIS
 
       filtered = @values().filter((x) => !isNaN(x))
 

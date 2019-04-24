@@ -49,9 +49,17 @@ ko.components.register "tf-grid",
     @cumulative_distribution = ( index ) ->
       model.show_cumulative_distribution(index)
       model.data_plotted(@table)
+    
+    @cumulative_distribution_sensitivity = ( index ) ->
+      model.show_cumulative_distribution("Sensitivity_"+index.toString())
+      model.data_plotted(@table)
 
     @autocorrelation = ( index ) ->
       model.show_autocorrelation(index)
+      model.data_plotted(@table)
+
+    @autocorrelation_sensitivity = ( index ) ->
+      model.show_autocorrelation("Sensitivity_"+index.toString())
       model.data_plotted(@table)
 
     @xyplot = ( index ) ->
@@ -64,6 +72,10 @@ ko.components.register "tf-grid",
     
     @qqplot = ( index ) ->
       model.show_qqplot(index)
+      model.data_plotted(@table)
+
+    @qqplot_sensitivity = ( index ) ->
+      model.show_qqplot("Sensitivity_"+index.toString())
       model.data_plotted(@table)
 
     @sensitivity = ( index ) ->
